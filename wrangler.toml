@@ -1,6 +1,8 @@
 name = "minecraft-ping"
-type = "webpack"
 workers_dev = true
+main = "./index"
 route = ""
-account_id = ""
-zone_id = ""
+account_id = "3ed51f2c99510cd7fe8fcd8ed0621a37"
+compatibility_date = "2022-07-27"
+node_compat = true
+type = "javascript"

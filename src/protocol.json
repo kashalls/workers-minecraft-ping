@@ -1,0 +1,214 @@
+{
+  "types": {
+    "varint": "native",
+    "pstring": "native",
+    "i64": "native",
+    "container": "native",
+    "switch": "native",
+    "string": [
+      "pstring",
+      {
+        "countType": "varint"
+      }
+    ]
+  },
+  "handshaking": {
+    "toClient": {
+      "types": {
+        "packet": [
+          "container",
+          [
+            {
+              "name": "name",
+              "type": [
+                "mapper",
+                {
+                  "type": "varint",
+                  "mappings": {}
+                }
+              ]
+            },
+            {
+              "name": "params",
+              "type": [
+                "switch",
+                {
+                  "compareTo": "name",
+                  "fields": {}
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    },
+    "toServer": {
+      "types": {
+        "packet_set_protocol": [
+          "container",
+          [
+            {
+              "name": "protocolVersion",
+              "type": "varint"
+            },
+            {
+              "name": "serverHost",
+              "type": "string"
+            },
+            {
+              "name": "serverPort",
+              "type": "u16"
+            },
+            {
+              "name": "nextState",
+              "type": "varint"
+            }
+          ]
+        ],
+        "packet_legacy_server_list_ping": [
+          "container",
+          [
+            {
+              "name": "payload",
+              "type": "u8"
+            }
+          ]
+        ],
+        "packet": [
+          "container",
+          [
+            {
+              "name": "name",
+              "type": [
+                "mapper",
+                {
+                  "type": "varint",
+                  "mappings": {
+                    "0x00": "set_protocol",
+                    "0xfe": "legacy_server_list_ping"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "params",
+              "type": [
+                "switch",
+                {
+                  "compareTo": "name",
+                  "fields": {
+                    "set_protocol": "packet_set_protocol",
+                    "legacy_server_list_ping": "packet_legacy_server_list_ping"
+                  }
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "status": {
+    "toClient": {
+      "types": {
+        "packet_server_info": [
+          "container",
+          [
+            {
+              "name": "response",
+              "type": "string"
+            }
+          ]
+        ],
+        "packet_ping": [
+          "container",
+          [
+            {
+              "name": "time",
+              "type": "i64"
+            }
+          ]
+        ],
+        "packet": [
+          "container",
+          [
+            {
+              "name": "name",
+              "type": [
+                "mapper",
+                {
+                  "type": "varint",
+                  "mappings": {
+                    "0x00": "server_info",
+                    "0x01": "ping"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "params",
+              "type": [
+                "switch",
+                {
+                  "compareTo": "name",
+                  "fields": {
+                    "server_info": "packet_server_info",
+                    "ping": "packet_ping"
+                  }
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    },
+    "toServer": {
+      "types": {
+        "packet_ping_start": [
+          "container",
+          []
+        ],
+        "packet_ping": [
+          "container",
+          [
+            {
+              "name": "time",
+              "type": "i64"
+            }
+          ]
+        ],
+        "packet": [
+          "container",
+          [
+            {
+              "name": "name",
+              "type": [
+                "mapper",
+                {
+                  "type": "varint",
+                  "mappings": {
+                    "0x00": "ping_start",
+                    "0x01": "ping"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "params",
+              "type": [
+                "switch",
+                {
+                  "compareTo": "name",
+                  "fields": {
+                    "ping_start": "packet_ping_start",
+                    "ping": "packet_ping"
+                  }
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

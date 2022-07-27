@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/Kashalls/workers-minecraft-ping#readme",
   "dependencies": {
-    "minecraft-protocol": "^1.35.1",
+    "protodef": "^1.15.0",
+    "readable-stream": "^4.1.0",
     "wrangler-js": "^0.1.11"
   }
 }
