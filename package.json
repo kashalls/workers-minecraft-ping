@@ -1,0 +1,23 @@
+{
+  "name": "workers-minecraft-ping",
+  "version": "1.0.0",
+  "description": "A test use case of using Cloudflare owrkers to ping minecraft servers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kashalls/workers-minecraft-ping.git"
+  },
+  "author": "Kashalls",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Kashalls/workers-minecraft-ping/issues"
+  },
+  "homepage": "https://github.com/Kashalls/workers-minecraft-ping#readme",
+  "dependencies": {
+    "minecraft-protocol": "^1.35.1",
+    "wrangler-js": "^0.1.11"
+  }
+}

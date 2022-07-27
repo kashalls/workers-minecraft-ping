@@ -1,0 +1,6 @@
+name = "minecraft-ping"
+type = "webpack"
+workers_dev = true
+route = ""
+account_id = ""
+zone_id = ""
